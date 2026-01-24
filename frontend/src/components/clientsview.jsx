@@ -55,17 +55,28 @@ const ClientsView = () => {
   const [clients, setClients] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // --- FETCH & TRANSLATE DATA ---
   useEffect(() => {
     const fetchClients = async () => {
       const { data, error } = await supabase
         .from('clients')
         .select('*');
-
+      
       if (error) {
-        console.log('Supabase Error:', error);
+        console.log('error', error);
       } else {
-        console.log('Supabase Data:', data); // Check console: Do columns match firstName/lastName?
-        setClients(data || []);
+        // MAPPING: Convert DB columns (snake_case) to App variables (camelCase)
+        const formattedData = data.map(client => ({
+          id: client.id,
+          firstName: client.first_name,  // The Translation happens here
+          lastName: client.last_name,    // And here
+          email: client.email,
+          cert: client.certification_level, // And here (certification_level -> cert)
+          dives: client.total_dives,        // And here (total_dives -> dives)
+          visits: [] // Placeholder: We will connect real visits in the next step
+        }));
+        
+        setClients(formattedData);
         setLoading(false);
       }
     };
