@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Search, Save, X, Calendar, Ship, Users } from 'lucide-react';
+import { supabase } from '../supabaseClient';
 
 // --- ENHANCED MOCK DATA ---
 // We added a 'visits' array to each client to track their history.
@@ -50,7 +51,26 @@ const MOCK_CLIENTS = [
 ];
 
 const ClientsView = () => {
-  const [clients, setClients] = useState(MOCK_CLIENTS);
+  // Initialize with empty array (loading state)
+  const [clients, setClients] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchClients = async () => {
+      const { data, error } = await supabase
+        .from('clients')
+        .select('*');
+
+      if (error) {
+        console.log('Supabase Error:', error);
+      } else {
+        console.log('Supabase Data:', data); // Check console: Do columns match firstName/lastName?
+        setClients(data || []);
+        setLoading(false);
+      }
+    };
+    fetchClients();
+  }, []);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedClient, setSelectedClient] = useState(null);
   const [showSuggestions, setShowSuggestions] = useState(false);
