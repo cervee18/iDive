@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, LayoutDashboard, Ship, Briefcase, Users, LogOut } from 'lucide-react';
+import { Home, LayoutDashboard, Ship, Briefcase, Users, LogOut, Hotel, FileText } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const Sidebar = ({ activeTab, setActiveTab }) => {
@@ -11,6 +11,8 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
     { name: 'Trips', icon: Ship },
     { name: 'Staff', icon: Briefcase },
     { name: 'Clients', icon: Users },
+    { name: 'Visits', icon: Hotel },
+    { name: 'Logs', icon: FileText },
   ];
 
   return (
