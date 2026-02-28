@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import Sidebar from '../components/sidebar';
-import ClientsView from '../components/clientsview';
-import HomeView from '../components/homeview';
-import TripsView from '../components/tripsview';
-import StaffView from '../components/staffview';
-import OverviewView from '../components/overviewview';
-import VisitsView from '../components/visitsview';
+import Sidebar from '../components/Sidebar';
+import ClientsView from '../components/ClientsView';
+import HomeView from '../components/HomeView';
+import TripsView from '../components/TripsView';
+import StaffView from '../components/StaffView';
+import OverviewView from '../components/OverviewView';
+import VisitsView from '../components/VisitsView';
 import LogsView from '../components/LogsView';
 
 
@@ -26,7 +26,7 @@ const Dashboard = () => {
         return <StaffView />;
       case 'Overview':
         return <OverviewView />;
-      case 'Visits':
+      case 'VisitsView':
         return <VisitsView />;
       case 'Logs':
         return <LogsView />;
