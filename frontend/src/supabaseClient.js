@@ -1,10 +1,10 @@
 import { createClient } from '@supabase/supabase-js'
 
-// 1. Go to your Supabase Dashboard -> Settings (Gear Icon) -> API
-// 2. Copy "Project URL" and paste it below
-const supabaseUrl = 'https://pbwgghzphsqmubuscpoi.supabase.co'
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
+const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY
 
-// 3. Copy "Project API Key" (anon public) and paste it below
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBid2dnaHpwaHNxbXVidXNjcG9pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjkwMjUyMzQsImV4cCI6MjA4NDYwMTIzNH0.GKKG5ylVH-pHe2Uu3A4Oc8sbwyoWWOpKPG4fvFyWA5Q'
+if (!supabaseUrl || !supabaseKey) {
+  throw new Error('Missing Supabase environment variables. Set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY.')
+}
 
 export const supabase = createClient(supabaseUrl, supabaseKey)
